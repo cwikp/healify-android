@@ -23,7 +23,8 @@
         <activity
             android:name=".activities.PatientsList"
             android:label="@string/title_activity_patients_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.patientBrowse"></activity>
     </application>
 
 </manifest>
