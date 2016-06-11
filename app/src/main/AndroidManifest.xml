@@ -27,6 +27,7 @@
         <activity android:name=".activities.patientBrowse" />
         <activity android:name=".activities.AddTemperaturePopup"></activity>
         <activity android:name=".activities.AddDrugPopup"></activity>
+        <activity android:name=".activities.AddCheckPopup"></activity>
     </application>
 
 </manifest>

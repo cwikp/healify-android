@@ -46,6 +46,19 @@ public class PatientEntry extends AppCompatActivity {
                 }
             });
 
+        // popup badania
+
+        Button checkButton = (Button) findViewById(R.id.check_button);
+
+        assert checkButton != null;
+        checkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PatientEntry.this, AddCheckPopup.class));
+
+            }
+        });
+
 
     }
 }
