@@ -16,6 +16,7 @@
             android:text="@string/temperature"/>
 
         <Button
+            android:id="@+id/drug_button"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_margin="20dp"

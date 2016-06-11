@@ -26,6 +26,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.patientBrowse" />
         <activity android:name=".activities.AddTemperaturePopup"></activity>
+        <activity android:name=".activities.AddDrugPopup"></activity>
     </application>
 
 </manifest>

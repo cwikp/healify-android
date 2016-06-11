@@ -15,12 +15,15 @@ import com.healify.R;
 public class PatientEntry extends AppCompatActivity {
 
     private PopupWindow tempPopup;
+    private PopupWindow drugPopup;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_browse);
 
+        // popup temperatury
         Button tempButton = (Button) findViewById(R.id.temp_button);
 
         assert tempButton != null;
@@ -31,7 +34,17 @@ public class PatientEntry extends AppCompatActivity {
 
             }
         });
+        // popup leków
+            Button drugButton = (Button) findViewById(R.id.drug_button);
 
+            assert drugButton != null;
+            drugButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(PatientEntry.this, AddDrugPopup.class));
+
+                }
+            });
 
 
     }

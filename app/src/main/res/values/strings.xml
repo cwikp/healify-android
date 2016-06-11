@@ -7,4 +7,12 @@
     <string name="drugs">Drugs</string>
     <string name="check">Check-ups</string>
 
+    //lista lekow
+
+    <string-array name="units">
+        <item>mg</item>
+        <item>g</item>
+        <item>ml</item>
+    </string-array>
+
 </resources>
