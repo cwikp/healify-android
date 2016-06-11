@@ -59,4 +59,5 @@ dependencies {
     provided "org.projectlombok:lombok:1.12.6"
     apt "org.projectlombok:lombok:1.12.6"
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile "com.androidplot:androidplot-core:0.9.8"
 }

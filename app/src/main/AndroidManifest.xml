@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.PatientEntry"
+            android:name=".activities.PatientBrowse"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,10 +24,11 @@
             android:name=".activities.PatientsList"
             android:label="@string/title_activity_patients_list"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.patientBrowse" />
-        <activity android:name=".activities.AddTemperaturePopup"></activity>
-        <activity android:name=".activities.AddDrugPopup"></activity>
-        <activity android:name=".activities.AddCheckPopup"></activity>
+        <activity android:name=".activities.PatientEntry" />
+        <activity android:name=".activities.AddTemperaturePopup" />
+        <activity android:name=".activities.AddDrugPopup" />
+        <activity android:name=".activities.AddCheckPopup" />
+        <activity android:name=".activities.BrowseTemperaturePopup"></activity>
     </application>
 
 </manifest>
