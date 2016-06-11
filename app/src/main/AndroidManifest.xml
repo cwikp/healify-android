@@ -11,8 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.MainActivity"
-            android:label="@string/app_name"
+            android:name=".activities.PatientsList"
+            android:label="@string/title_activity_patients_list"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,9 +21,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.PatientsList"
-            android:label="@string/title_activity_patients_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".activities.MainActivity"
+            android:label="Main activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.SinglePatient"
+            android:label="@string/title_activity_single_patient"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
