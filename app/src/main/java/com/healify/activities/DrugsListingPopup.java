@@ -36,11 +36,6 @@ public class DrugsListingPopup extends AppCompatActivity implements View.OnClick
         Button okButton = (Button) findViewById(R.id.listing_ok_button);
         okButton.setOnClickListener(this);
 
-        //ToDo: remove this mock
-        DrugEntity[] drugEntities = {new DrugEntity("Panadol", 500, "mg"),
-                                     new DrugEntity("Wit. C", 2500, "ml"),
-                                     new DrugEntity("Aspirin", 3, "g")};
-
         Call<List<DrugDTO>> call = drugAPI.getPatientsDrugs(patientDTO.getBeaconId());
         call.enqueue(new Callback<List<DrugDTO>>() {
             @Override
@@ -58,22 +53,20 @@ public class DrugsListingPopup extends AppCompatActivity implements View.OnClick
 
             }
         });
+    }
 
+    private void drugsDownloaded(List<DrugDTO> drugDTOs) {
+        Log.i("DrugListingPopup", drugDTOs.toString());
 
         TextView drugList = (TextView) findViewById(R.id.drugs);
-
         String drugsString = "";
-        for(int i=0; i<drugEntities.length; i++) {
-            String drug = drugEntities[i].getName() + " " +
-                    Integer.toString(drugEntities[i].getDose()) + " " +
-                    drugEntities[i].getUnit() + "\n";
+        for(int i=0; i<drugDTOs.size(); i++) {
+            String drug = drugDTOs.get(i).getName() + " " +
+                    drugDTOs.get(i).getQuantity() + " " +
+                    drugDTOs.get(i).getUnit() + "\n";
             drugsString = drugsString.concat(drug);
         }
         drugList.setText(drugsString);
-    }
-
-    private void drugsDownloaded(List<DrugDTO> body) {
-        Log.i("DrugListingPopup", body.toString());
     }
 
     @Override
