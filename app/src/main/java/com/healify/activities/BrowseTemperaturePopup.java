@@ -11,17 +11,20 @@ import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.healify.R;
+import com.healify.web.dto.PatientDTO;
 
 import java.util.Arrays;
 
 public class BrowseTemperaturePopup extends AppCompatActivity implements View.OnClickListener {
 
     private XYPlot temperaturePlot;
+    private PatientDTO patientDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.browse_temperature_popup);
+        this.patientDTO = (PatientDTO) getIntent().getSerializableExtra("patientDTO");
 
         // ToDo: remove this mock
         this.temperaturePlot = (XYPlot) findViewById(R.id.temperature_plot);

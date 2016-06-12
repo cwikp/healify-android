@@ -9,13 +9,17 @@ import android.widget.TextView;
 import com.healify.R;
 import com.healify.entities.CheckupEntity;
 import com.healify.entities.DrugEntity;
+import com.healify.web.dto.PatientDTO;
 
 public class CheckupListingPopup extends AppCompatActivity implements View.OnClickListener {
+
+    private PatientDTO patientDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listing_popup);
+        this.patientDTO = (PatientDTO) getIntent().getSerializableExtra("patientDTO");
 
         Button okButton = (Button) findViewById(R.id.listing_ok_button);
         okButton.setOnClickListener(this);
