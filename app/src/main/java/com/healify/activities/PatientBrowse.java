@@ -7,13 +7,18 @@ import android.view.View;
 import android.widget.Button;
 
 import com.healify.R;
+import com.healify.web.dto.PatientDTO;
 
 public class PatientBrowse extends AppCompatActivity {
+
+    private PatientDTO patientDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_browse);
+
+        patientDTO = (PatientDTO) getIntent().getSerializableExtra("patientDTO");
 
         // temperature popup
         Button temperatureButton = (Button) findViewById(R.id.temp_button);
