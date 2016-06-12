@@ -27,6 +27,10 @@ public class SinglePatient extends AppCompatActivity {
 
         View view = findViewById(R.id.single_patient_id);
 
+        Intent intent = getIntent();
+        patientDTO = (PatientDTO) intent.getSerializableExtra("patient");
+        showPatient(view, patientDTO);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +47,9 @@ public class SinglePatient extends AppCompatActivity {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SinglePatient.this, PatientEntry.class));
+                Intent intent = new Intent(SinglePatient.this, PatientEntry.class);
+                intent.putExtra("patientDTO", patientDTO);
+                SinglePatient.this.startActivity(intent);
             }
         });
 
@@ -51,7 +57,9 @@ public class SinglePatient extends AppCompatActivity {
         healthstateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SinglePatient.this, PatientBrowse.class));
+                Intent intent = new Intent(SinglePatient.this, PatientBrowse.class);
+                intent.putExtra("patientDTO", patientDTO);
+                SinglePatient.this.startActivity(intent);
             }
         });
 
@@ -62,12 +70,6 @@ public class SinglePatient extends AppCompatActivity {
                 startActivity(new Intent(SinglePatient.this, CheckOutPopup.class));
             }
         });
-
-
-
-        Intent intent = getIntent();
-        patientDTO = (PatientDTO) intent.getSerializableExtra("patient");
-        showPatient(view, patientDTO);
     }
 
     private void showPatient(View view, PatientDTO patient) {

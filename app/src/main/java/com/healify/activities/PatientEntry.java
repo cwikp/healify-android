@@ -11,13 +11,18 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.healify.R;
+import com.healify.web.dto.PatientDTO;
 
 public class PatientEntry extends AppCompatActivity {
+
+    private PatientDTO patientDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_browse);
+
+        patientDTO = (PatientDTO) getIntent().getSerializableExtra("patientDTO");
 
         // popup temperatury
         Button tempButton = (Button) findViewById(R.id.temp_button);
@@ -26,8 +31,9 @@ public class PatientEntry extends AppCompatActivity {
         tempButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PatientEntry.this, AddTemperaturePopup.class));
-
+                Intent intent = new Intent(PatientEntry.this, AddTemperaturePopup.class);
+                intent.putExtra("patientDTO", patientDTO);
+                startActivity(intent);
             }
         });
         // popup leków
