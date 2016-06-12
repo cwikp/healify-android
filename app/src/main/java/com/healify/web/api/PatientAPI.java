@@ -8,6 +8,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -31,4 +32,7 @@ public interface PatientAPI {
 
     @PATCH("api/patients/{id}/check-ups")
     Call<Void> sendCheckUp(@Path("id") String id, @Body CheckUpDTO checkUpDTO);
+
+    @DELETE("api/patients/{id}/check-out")
+    Call<Void> sendCheckOut(@Path("id") String id);
 }
