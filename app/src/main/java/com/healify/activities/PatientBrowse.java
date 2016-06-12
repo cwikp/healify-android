@@ -25,7 +25,9 @@ public class PatientBrowse extends AppCompatActivity {
         temperatureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PatientBrowse.this, BrowseTemperaturePopup.class));
+                Intent intent = new Intent(PatientBrowse.this, BrowseTemperaturePopup.class);
+                intent.putExtra("patientDTO", patientDTO);
+                PatientBrowse.this.startActivity(intent);
             }
         });
 
@@ -34,7 +36,9 @@ public class PatientBrowse extends AppCompatActivity {
         drugsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PatientBrowse.this, DrugsListingPopup.class));
+                Intent intent = new Intent(PatientBrowse.this, DrugsListingPopup.class);
+                intent.putExtra("patientDTO", patientDTO);
+                PatientBrowse.this.startActivity(intent);
             }
         });
 
@@ -43,7 +47,9 @@ public class PatientBrowse extends AppCompatActivity {
         checkupsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PatientBrowse.this, CheckupListingPopup.class));
+                Intent intent = new Intent(PatientBrowse.this, CheckupListingPopup.class);
+                intent.putExtra("patientDTO", patientDTO);
+                PatientBrowse.this.startActivity(intent);
             }
         });
     }

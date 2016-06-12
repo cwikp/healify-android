@@ -7,9 +7,8 @@ import lombok.experimental.Builder;
 @Data
 @Builder
 @AllArgsConstructor(suppressConstructorProperties = true)
-public class DrugDTO {
+public class TemperatureDTO {
+
     private String date;
-    private String name;
-    private String unit;
-    private String quantity;
+    private String value;
 }

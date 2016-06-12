@@ -37,9 +37,9 @@ public class AddTemperaturePopup extends Activity {
             @Override
             public void onClick(View v) {
                 String id = patientDTO.getBeaconId();
-                int temperature = Integer.parseInt(((TextView) findViewById(R.id.temperature_input)).getText().toString());
+                String temperature = ((TextView) findViewById(R.id.temperature_input)).getText().toString();
 
-                PatientAPI service = ServiceGenerator.createService(PatientAPI.class, null);
+                PatientAPI service = ServiceGenerator.createService(PatientAPI.class, "application/json");
                 Call<Void> call = service.sendTemperature(id, temperature);
                 call.enqueue(new Callback<Void>() {
                     @Override

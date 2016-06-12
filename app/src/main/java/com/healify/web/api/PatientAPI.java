@@ -1,11 +1,15 @@
 package com.healify.web.api;
 
+import com.healify.web.dto.CheckUpDTO;
+import com.healify.web.dto.DrugDTO;
 import com.healify.web.dto.PatientDTO;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -21,6 +25,14 @@ public interface PatientAPI {
     Call<PatientDTO> checkInPatient(@Body PatientDTO patientDTO);
 
     @PATCH("api/patients/{id}")
-    Call<Void> sendTemperature(@Path("id") String id, @Query("temperature") int temperature);
+    Call<Void> sendTemperature(@Path("id") String id, @Query("temperature") String temperature);
 
+    @PATCH("api/patients/{id}/drugs")
+    Call<Void> sendDrug(@Path("id") String id, @Body DrugDTO drugDTO);
+
+    @PATCH("api/patients/{id}/check-ups")
+    Call<Void> sendCheckUp(@Path("id") String id, @Body CheckUpDTO checkUpDTO);
+
+    @DELETE("api/patients/{id}/check-out")
+    Call<Void> sendCheckOut(@Path("id") String id);
 }
