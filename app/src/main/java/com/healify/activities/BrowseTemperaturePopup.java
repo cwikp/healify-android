@@ -17,9 +17,8 @@ import com.healify.web.dto.PatientDTO;
 import com.healify.web.dto.TemperatureDTO;
 import com.healify.web.services.ServiceGenerator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import     java.util.List;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -85,11 +84,14 @@ public class BrowseTemperaturePopup extends AppCompatActivity implements View.On
 
 //        List<Number> x = new ArrayList<>();
 //        List<Number> data = new ArrayList<>();
-
+//
         for (int i = 0; i < temperatures.size(); i++) {
             x[i] = i;
             data[i] = Double.valueOf(temperatures.get(i).getValue());
         }
+
+//        Number[] data = {37.1, 36.6, 37.5, 38.2, 38.8, 37.3};
+//        Number[] x = {1, 2, 3, 4, 5, 6};
 
         Log.i("X values", x.toString());
         Log.i("Temperature values", data.toString());
@@ -98,6 +100,8 @@ public class BrowseTemperaturePopup extends AppCompatActivity implements View.On
                 Arrays.asList(data),
                 "Temperature");
         temperaturePlot.addSeries(series, new LineAndPointFormatter());
+
+        temperaturePlot.redraw();
 
     }
 
