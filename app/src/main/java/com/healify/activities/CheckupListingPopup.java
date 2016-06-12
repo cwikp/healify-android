@@ -1,7 +1,8 @@
 package com.healify.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -9,8 +10,10 @@ import android.widget.Toast;
 
 import com.healify.R;
 import com.healify.entities.CheckupEntity;
+import com.healify.web.api.CheckupAPI;
+import com.healify.web.dto.CheckUpDTO;
 import com.healify.entities.DrugEntity;
-import com.healify.web.api.CheckUpAPI;
+
 import com.healify.web.api.DrugAPI;
 import com.healify.web.dto.CheckUpDTO;
 import com.healify.web.dto.DrugDTO;
@@ -38,15 +41,16 @@ public class CheckupListingPopup extends AppCompatActivity implements View.OnCli
         Button okButton = (Button) findViewById(R.id.listing_ok_button);
         okButton.setOnClickListener(this);
 
-        Call<List<CheckUpDTO>> call = checkUpAPI.getPatientCheckups(patientDTO.getBeaconId());
+        Call<List<CheckUpDTO>> call = checkupAPI.getPatientsCheckups(patientDTO.getBeaconId());
         call.enqueue(new Callback<List<CheckUpDTO>>() {
             @Override
             public void onResponse(Call<List<CheckUpDTO>> call, Response<List<CheckUpDTO>> response) {
-                if (response.isSuccessful()) {
-                    checkupsDownloaded(response.body());
-                    Toast.makeText(CheckupListingPopup.this, "Drugs downloaded successfully", Toast.LENGTH_LONG);
-                } else {
-                    Toast.makeText(CheckupListingPopup.this, "Drugs not downloaded", Toast.LENGTH_LONG).show();
+                if(response.isSuccessful()){
+                    checkupsDownloaded(body);
+                    Toast.makeText(CheckupListingPopup.this, "Patients downloaded successfully", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(CheckupListingPopup.this, "Patients not downloaded", Toast.LENGTH_LONG).show();
                 }
             }
 
