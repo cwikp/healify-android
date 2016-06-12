@@ -2,6 +2,7 @@ package com.healify.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,6 +46,8 @@ public class AddDrugPopup extends Activity implements AdapterView.OnItemSelected
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         drugSpinner.setAdapter(adapter);
 
+        drugSpinner.setOnItemSelectedListener(this);
+
         Button okButton = (Button) findViewById(R.id.drug_ok_button);
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +57,7 @@ public class AddDrugPopup extends Activity implements AdapterView.OnItemSelected
                 String dose = ((TextView) findViewById(R.id.drug_dose_input)).getText().toString();
 
                 DrugDTO drugDTO = DrugDTO.builder().name(name).quantity(dose).unit(drugUnit).build();
+                Log.e("MISIU!!!", drugUnit);
 
                 PatientAPI service = ServiceGenerator.createService(PatientAPI.class, "application/json");
                 Call<Void> call = service.sendDrug(id, drugDTO);
