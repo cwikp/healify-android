@@ -1,6 +1,7 @@
 package com.healify.activities;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +31,7 @@ import com.kontakt.sdk.android.common.profile.IBeaconDevice;
 import com.kontakt.sdk.android.common.profile.IBeaconRegion;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -35,10 +41,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CheckInPatient extends AppCompatActivity {
+public class CheckInPatient extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private ProximityManagerContract proximityManager;
     private Set<PatientsList.Beacon> beacons = Collections.synchronizedSet(new HashSet<PatientsList.Beacon>());
+    private TextView birthDate;
+    private TextView datein;
+    private Spinner beaconSpinner;
+    private ArrayAdapter<String> dataAdapter;
+    private String beaconId;
 
 
     @Override
@@ -57,6 +68,9 @@ public class CheckInPatient extends AppCompatActivity {
             }
         });
 
+        birthDate = (TextView) findViewById(R.id.singlePatientBirthDate);
+        datein = (TextView) findViewById(R.id.singlePatientDatein);
+
         Intent returnIntent = getIntent();
         setResult(Activity.RESULT_OK, returnIntent);
 
@@ -66,6 +80,12 @@ public class CheckInPatient extends AppCompatActivity {
         proximityManager.setIBeaconListener(createIBeaconListener());
         proximityManager.configuration()
                 .scanPeriod(ScanPeriod.RANGING);
+
+        beaconSpinner = (Spinner) findViewById(R.id.spinnerBeacons);
+//        adapter = ArrayAdapter.createFromResource(this, R.array.beacons, R.layout.spinner_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
 
     }
 
@@ -80,7 +100,7 @@ public class CheckInPatient extends AppCompatActivity {
                 response.code();
 
                 if(response.isSuccessful()){
-                    Toast.makeText(CheckInPatient.this, "Patient saved successfully", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CheckInPatient.this, "Patient saved successfully " + response.code(), Toast.LENGTH_LONG).show();
                 }
                 else {
                     Toast.makeText(CheckInPatient.this, "Patient not saved", Toast.LENGTH_LONG).show();
@@ -100,8 +120,6 @@ public class CheckInPatient extends AppCompatActivity {
 
         TextView name = (TextView) view.findViewById(R.id.singlePatientName);
         TextView surname = (TextView) view.findViewById(R.id.singlePatientSurname);
-        TextView birthDate = (TextView) view.findViewById(R.id.singlePatientBirthDate);
-        TextView datein = (TextView) view.findViewById(R.id.singlePatientDatein);
         TextView diagnosis = (TextView) view.findViewById(R.id.singlePatientDiagnosis);
         TextView doctor = (TextView) view.findViewById(R.id.singlePatientDoctor);
 
@@ -112,6 +130,7 @@ public class CheckInPatient extends AppCompatActivity {
                 .in(datein.getText().toString())
                 .disease(diagnosis.getText().toString())
                 .doctor(doctor.getText().toString())
+                .beaconId(beaconId)
                 .build();
 
         return patientDTO;
@@ -163,6 +182,16 @@ public class CheckInPatient extends AppCompatActivity {
                     beacons.add(beacon);
                 }
 
+                List<PatientsList.Beacon> beaconsList = getSortedBeacons();
+                List<String> list = new ArrayList<>();
+                for (PatientsList.Beacon beacon : beaconsList) {
+                    list.add(beacon.getId().toString());
+                }
+                dataAdapter = new ArrayAdapter<>(CheckInPatient.this, android.R.layout.simple_spinner_item, list);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                beaconSpinner.setAdapter(dataAdapter);
+                beaconSpinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+
 //                Log.i("Sample", beacons.toString());
 
             }
@@ -188,4 +217,66 @@ public class CheckInPatient extends AppCompatActivity {
         return sortedBeacons;
     }
 
+    public void onBirthDateButtonClicked(View view) {
+      datePicker(1);
+    }
+
+    public void onDateInButtonClicked(View view) {
+        datePicker(2);
+    }
+
+    private void datePicker(final int field){
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        String y = Integer.toString(year);
+                        String m = Integer.toString(monthOfYear + 1);
+                        String d = Integer.toString(dayOfMonth);
+                        if (monthOfYear < 10) {
+                            m = "0" + m;
+                        }
+                        if (dayOfMonth < 10) {
+                            d = "0" + d;
+                        }
+                        if (field == 1)
+                            birthDate.setText(y + "/" + m + "/" + d);
+                        else datein.setText(y + "/" + m + "/" + d);
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+
+    public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+            beaconId = parent.getItemAtPosition(pos).toString();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+
+        }
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        beaconId = this.dataAdapter.getItem(position);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        //dadad
+    }
 }
