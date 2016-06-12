@@ -9,6 +9,9 @@
     <string name="temperature">Temperature</string>
     <string name="drugs">Drugs</string>
     <string name="check">Check-ups</string>
+    <string name="sure">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     //lista lekow
 

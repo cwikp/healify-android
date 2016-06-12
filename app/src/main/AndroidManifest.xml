@@ -36,6 +36,7 @@
         <activity android:name=".activities.BrowseTemperaturePopup" />
         <activity android:name=".activities.DrugsListingPopup" />
         <activity android:name=".activities.CheckupListingPopup" />
+        <activity android:name=".activities.CheckOutPopup" />
     </application>
 
 </manifest>

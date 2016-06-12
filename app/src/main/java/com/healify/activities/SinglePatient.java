@@ -51,13 +51,13 @@ public class SinglePatient extends AppCompatActivity {
             }
         });
 
-//        Button checkoutButton = (Button) findViewById(R.id.buttonCheckOut);
-//        checkoutButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(SinglePatient.this, CheckOutPopup.class));
-//            }
-//        });
+        Button checkoutButton = (Button) findViewById(R.id.buttonCheckOut);
+        checkoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SinglePatient.this, CheckOutPopup.class));
+            }
+        });
 
 
 
