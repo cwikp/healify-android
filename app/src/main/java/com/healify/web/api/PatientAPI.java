@@ -1,5 +1,6 @@
 package com.healify.web.api;
 
+import com.healify.web.dto.DrugDTO;
 import com.healify.web.dto.PatientDTO;
 
 import java.util.List;
@@ -24,4 +25,6 @@ public interface PatientAPI {
     @PATCH("api/patients/{id}")
     Call<Void> sendTemperature(@Path("id") String id, @Query("temperature") String temperature);
 
+    @PATCH("api/patients/{id}/drugs")
+    Call<Void> sendDrug(@Path("id") String id, @Body DrugDTO drugDTO);
 }
