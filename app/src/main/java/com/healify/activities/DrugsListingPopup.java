@@ -16,7 +16,7 @@ public class DrugsListingPopup extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listing_popup);
 
-        Button okButton = (Button) findViewById(R.id.drugs_listing_ok_button);
+        Button okButton = (Button) findViewById(R.id.listing_ok_button);
         okButton.setOnClickListener(this);
 
         //ToDo: remove this mock
