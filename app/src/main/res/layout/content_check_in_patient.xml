@@ -67,6 +67,8 @@
             android:layout_height="wrap_content"
             android:hint="Birth date"
             android:id="@+id/singlePatientBirthDate"
+            android:editable="false"
+            android:onClick="onBirthDateButtonClicked"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_row="3"
             android:layout_column="1" />
@@ -83,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Date-in"
+            android:onClick="onDateInButtonClicked"
             android:id="@+id/singlePatientDatein"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_row="4"
@@ -123,6 +126,25 @@
             android:id="@+id/singlePatientDoctor"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_row="6"
+            android:layout_column="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Beacon ID"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textView"
+            android:layout_row="7"
+            android:layout_column="0" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerBeacons"
+            android:layout_below="@+id/gridLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_row="7"
             android:layout_column="1" />
 
     </GridLayout>
