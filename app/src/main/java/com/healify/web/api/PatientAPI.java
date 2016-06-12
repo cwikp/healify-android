@@ -1,5 +1,6 @@
 package com.healify.web.api;
 
+import com.healify.web.dto.CheckUpDTO;
 import com.healify.web.dto.DrugDTO;
 import com.healify.web.dto.PatientDTO;
 
@@ -27,4 +28,7 @@ public interface PatientAPI {
 
     @PATCH("api/patients/{id}/drugs")
     Call<Void> sendDrug(@Path("id") String id, @Body DrugDTO drugDTO);
+
+    @PATCH("api/patients/{id}/check-ups")
+    Call<Void> sendCheckUp(@Path("id") String id, @Body CheckUpDTO checkUpDTO);
 }
