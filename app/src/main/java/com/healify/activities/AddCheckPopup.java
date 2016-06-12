@@ -2,6 +2,7 @@ package com.healify.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class AddCheckPopup extends Activity {
                 String id = patientDTO.getBeaconId();
                 String name = ((TextView) findViewById(R.id.checkup_name_input)).getText().toString();
                 String result = ((TextView) findViewById(R.id.checkup_result_input)).getText().toString();
+                Log.e("MISIU!!!", result);
 
                 CheckUpDTO checkUpDTO = CheckUpDTO.builder().name(name).result(result).build();
 
