@@ -46,6 +46,8 @@ public class PatientsList extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(PatientsList.this, CheckInPatient.class);
+                PatientsList.this.startActivityForResult(intent, 1);
             }
 
         });
@@ -72,8 +74,6 @@ public class PatientsList extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<PatientDTO>> call, Response<List<PatientDTO>> response) {
                 response.code();
-                Intent returnIntent = getIntent();
-                setResult(Activity.RESULT_OK, returnIntent);
 
                 if(response.isSuccessful()){
                     setPatientsData(response.body());
@@ -107,7 +107,6 @@ public class PatientsList extends AppCompatActivity {
             }
             else{
                 Toast.makeText(this, "Patient might not have been created", Toast.LENGTH_LONG).show();
-
             }
         }
     }

@@ -6,7 +6,7 @@ import lombok.experimental.Builder;
 
 @Data
 @Builder
-@AllArgsConstructor
+@AllArgsConstructor(suppressConstructorProperties = true)
 public class DrugDTO {
     private String date;
     private String name;

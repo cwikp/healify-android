@@ -29,10 +29,10 @@ public class NavigationDrawer {
     }
 
     public void setupDrawer() {
-        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withName("Share a Toast");
-        SecondaryDrawerItem item2 = (SecondaryDrawerItem) new SecondaryDrawerItem().withName("Events List");
-        final SecondaryDrawerItem item3 = (SecondaryDrawerItem) new SecondaryDrawerItem().withName("Create new event");
-        final SecondaryDrawerItem item4 = (SecondaryDrawerItem) new SecondaryDrawerItem().withName("Show map");
+        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withName("Healify");
+        SecondaryDrawerItem item2 = (SecondaryDrawerItem) new SecondaryDrawerItem().withName("Update");
+        final SecondaryDrawerItem item3 = (SecondaryDrawerItem) new SecondaryDrawerItem().withName("Health state");
+        final SecondaryDrawerItem item4 = (SecondaryDrawerItem) new SecondaryDrawerItem().withName("CheckOut");
 
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(activity)
