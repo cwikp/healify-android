@@ -28,7 +28,7 @@ import retrofit2.Response;
 
 public class CheckupListingPopup extends AppCompatActivity implements View.OnClickListener {
 
-    private CheckUpAPI checkUpAPI = ServiceGenerator.createService(CheckUpAPI.class, null);
+    private CheckupAPI checkUpAPI = ServiceGenerator.createService(CheckupAPI.class, null);
 
     private PatientDTO patientDTO;
 
@@ -41,12 +41,12 @@ public class CheckupListingPopup extends AppCompatActivity implements View.OnCli
         Button okButton = (Button) findViewById(R.id.listing_ok_button);
         okButton.setOnClickListener(this);
 
-        Call<List<CheckUpDTO>> call = checkupAPI.getPatientsCheckups(patientDTO.getBeaconId());
+        Call<List<CheckUpDTO>> call = checkUpAPI.getPatientsCheckups(patientDTO.getBeaconId());
         call.enqueue(new Callback<List<CheckUpDTO>>() {
             @Override
             public void onResponse(Call<List<CheckUpDTO>> call, Response<List<CheckUpDTO>> response) {
                 if(response.isSuccessful()){
-                    checkupsDownloaded(body);
+                    checkupsDownloaded(response.body());
                     Toast.makeText(CheckupListingPopup.this, "Patients downloaded successfully", Toast.LENGTH_LONG).show();
                 }
                 else {
