@@ -1,6 +1,5 @@
 package com.healify.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,17 +19,36 @@ import com.healify.utils.NavigationDrawer;
 import com.healify.web.api.PatientAPI;
 import com.healify.web.dto.PatientDTO;
 import com.healify.web.services.ServiceGenerator;
+import com.kontakt.sdk.android.ble.configuration.ScanPeriod;
+import com.kontakt.sdk.android.ble.connection.OnServiceReadyListener;
+import com.kontakt.sdk.android.ble.manager.ProximityManager;
+import com.kontakt.sdk.android.ble.manager.ProximityManagerContract;
+import com.kontakt.sdk.android.ble.manager.listeners.IBeaconListener;
+import com.kontakt.sdk.android.ble.manager.listeners.simple.SimpleIBeaconListener;
+import com.kontakt.sdk.android.common.KontaktSDK;
+import com.kontakt.sdk.android.common.profile.IBeaconDevice;
+import com.kontakt.sdk.android.common.profile.IBeaconRegion;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PatientsList extends AppCompatActivity {
 
+    private ProximityManagerContract proximityManager;
+    private Set<Beacon> beacons = Collections.synchronizedSet(new HashSet<Beacon>());
     private List<PatientDTO> patientsData = new ArrayList<>();
     private PatientDTO PatientDTO;
 
@@ -60,13 +78,22 @@ public class PatientsList extends AppCompatActivity {
         NavigationDrawer navigationDrawer = new NavigationDrawer(this, toolbar);
         navigationDrawer.setupDrawer();
 
+        KontaktSDK.initialize("ICoaWqUPuyRrbSeeTCOZHfbtjtwrzFqn");
+
+        proximityManager = new ProximityManager(this);
+        proximityManager.setIBeaconListener(createIBeaconListener());
+        proximityManager.configuration()
+                .scanPeriod(ScanPeriod.RANGING);
+
     }
 
     private void getPatientsFromServer() {
         List<String> beaconsIds = new ArrayList<>();
-        beaconsIds.add("Xt9P");
-        beaconsIds.add("PUyp");
-        beaconsIds.add("kBZ8");
+
+        for (Beacon beacon : beacons) {
+            beaconsIds.add(beacon.getId());
+        }
+
         PatientAPI service = ServiceGenerator.createService(PatientAPI.class, null);
         Call<List<PatientDTO>> call = service.getPatientsWithIds(beaconsIds);
         call.enqueue(new Callback<List<PatientDTO>>() {
@@ -76,7 +103,13 @@ public class PatientsList extends AppCompatActivity {
                 response.code();
 
                 if(response.isSuccessful()){
-                    setPatientsData(response.body());
+                    List<PatientDTO> body = response.body();
+
+                    List<PatientDTO> matchedPatients = sortPatients(body);
+
+                    Log.i("Sample", matchedPatients.toString());
+
+                    setPatientsData(matchedPatients);
                     fillpatientsListView();
                     Toast.makeText(PatientsList.this, "Patients downloaded successfully", Toast.LENGTH_LONG).show();
                 }
@@ -134,6 +167,12 @@ public class PatientsList extends AppCompatActivity {
         });
     }
 
+    public List<Beacon> getSortedBeacons() {
+        List<Beacon> sortedBeacons = new ArrayList<>(beacons);
+        Collections.sort(sortedBeacons);
+        return sortedBeacons;
+    }
+
     private class PatientsListAdapter extends ArrayAdapter<PatientDTO>{
 
         SimpleDateFormat dateFormatter = new SimpleDateFormat("EEE d MMM ''yy");
@@ -162,6 +201,105 @@ public class PatientsList extends AppCompatActivity {
             }
 
             return itemView;
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        startScanning();
+    }
+
+    @Override
+    protected void onStop() {
+        proximityManager.stopScanning();
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        proximityManager.disconnect();
+        proximityManager = null;
+        super.onDestroy();
+    }
+
+    private void startScanning() {
+        proximityManager.connect(new OnServiceReadyListener() {
+            @Override
+            public void onServiceReady() {
+                proximityManager.startScanning();
+            }
+        });
+    }
+
+    private IBeaconListener createIBeaconListener() {
+        return new SimpleIBeaconListener() {
+
+            @Override
+            public void onIBeaconsUpdated(List<IBeaconDevice> iBeacons, IBeaconRegion region) {
+                Log.i("Sample", "updated: " + iBeacons.size());
+
+                for(IBeaconDevice ibeacon : iBeacons) {
+                    Beacon beacon = new Beacon(ibeacon.getUniqueId(), ibeacon.getRssi());
+//                Log.i("Sample", getBeacons().toString());
+
+                    if(beacons.contains(beacon)) {
+                        beacons.remove(beacon);
+                    }
+
+                    beacons.add(beacon);
+                }
+
+//                Log.i("Sample", beacons.toString());
+                getPatientsFromServer();
+
+            }
+
+            @Override
+            public void onIBeaconLost(IBeaconDevice ibeacon, IBeaconRegion region) {
+                Beacon beacon = new Beacon(ibeacon.getUniqueId(), ibeacon.getRssi());
+
+                if(beacons.contains(beacon)) {
+                    beacons.remove(beacon);
+                    Log.i("Sample", "beacon removed: " + beacon.getId());
+                }
+
+            }
+
+        };
+    }
+
+    private List<PatientDTO> sortPatients(List<PatientDTO> patients) {
+        Map<String, PatientDTO> mappedPatients = new HashMap<>();
+
+        for(PatientDTO patient : patients) {
+            mappedPatients.put(patient.getBeaconId(), patient);
+        }
+
+        List<Beacon> sortedBeacons = getSortedBeacons();
+
+        List<PatientDTO> matchedPatients = new ArrayList<>(patients.size());
+
+        for (Beacon beacon : sortedBeacons) {
+            if(mappedPatients.containsKey(beacon.getId())) {
+                matchedPatients.add(mappedPatients.get(beacon.getId()));
+            }
+        }
+
+        return matchedPatients;
+    }
+
+    @Data
+    @RequiredArgsConstructor(suppressConstructorProperties = true)
+    @EqualsAndHashCode(exclude = {"rssi"})
+    public static class Beacon implements Comparable<Beacon> {
+
+        private final String id;
+        private final double rssi;
+
+        @Override
+        public int compareTo(Beacon other) {
+            return Double.compare(other.rssi, this.rssi);
         }
     }
 

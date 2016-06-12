@@ -56,6 +56,7 @@ dependencies {
     compile('com.mikepenz:materialdrawer:5.2.6@aar') {
         transitive = true
     }
+    compile 'com.kontaktio:sdk:3.0.0'
     provided "org.projectlombok:lombok:1.12.6"
     apt "org.projectlombok:lombok:1.12.6"
     compile 'de.hdodenhof:circleimageview:2.0.0'
