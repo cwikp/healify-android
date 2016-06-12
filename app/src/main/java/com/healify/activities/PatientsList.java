@@ -72,7 +72,7 @@ public class PatientsList extends AppCompatActivity {
 
         getPatientsFromServer();
 
-        Toast.makeText(PatientsList.this, "Started", Toast.LENGTH_LONG).show();
+//        Toast.makeText(PatientsList.this, "Started", Toast.LENGTH_LONG).show();
         onPatientsListItemClick();
 
         NavigationDrawer navigationDrawer = new NavigationDrawer(this, toolbar);
@@ -111,10 +111,10 @@ public class PatientsList extends AppCompatActivity {
 
                     setPatientsData(matchedPatients);
                     fillpatientsListView();
-                    Toast.makeText(PatientsList.this, "Patients downloaded successfully", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(PatientsList.this, "Patients downloaded successfully", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Toast.makeText(PatientsList.this, "Patients not downloaded", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(PatientsList.this, "Patients not downloaded", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -135,11 +135,11 @@ public class PatientsList extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1){
             if(resultCode == RESULT_OK){
-                Toast.makeText(this, data.getStringExtra("createPatientResult"), Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, data.getStringExtra("createPatientResult"), Toast.LENGTH_LONG).show();
                 getPatientsFromServer();
             }
             else{
-                Toast.makeText(this, "Patient might not have been created", Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, "Patient might not have been created", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -158,7 +158,7 @@ public class PatientsList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PatientDTO clickedPatient = patientsData.get(position);
-                Toast.makeText(PatientsList.this, clickedPatient.getFirstName(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(PatientsList.this, clickedPatient.getFirstName(), Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(PatientsList.this, SinglePatient.class);
                 intent.putExtra("patient", clickedPatient);

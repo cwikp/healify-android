@@ -100,10 +100,10 @@ public class CheckInPatient extends AppCompatActivity implements AdapterView.OnI
                 response.code();
 
                 if(response.isSuccessful()){
-                    Toast.makeText(CheckInPatient.this, "Patient saved successfully " + response.code(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(CheckInPatient.this, "Patient saved successfully " + response.code(), Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Toast.makeText(CheckInPatient.this, "Patient not saved", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(CheckInPatient.this, "Patient not saved", Toast.LENGTH_LONG).show();
                 }
             }
 

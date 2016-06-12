@@ -47,10 +47,10 @@ public class CheckupListingPopup extends AppCompatActivity implements View.OnCli
             public void onResponse(Call<List<CheckUpDTO>> call, Response<List<CheckUpDTO>> response) {
                 if(response.isSuccessful()){
                     checkupsDownloaded(response.body());
-                    Toast.makeText(CheckupListingPopup.this, "Patients downloaded successfully", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(CheckupListingPopup.this, "Patients downloaded successfully", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Toast.makeText(CheckupListingPopup.this, "Patients not downloaded", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(CheckupListingPopup.this, "Patients not downloaded", Toast.LENGTH_LONG).show();
                 }
             }
 

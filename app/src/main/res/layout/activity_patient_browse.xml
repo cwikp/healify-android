@@ -13,7 +13,9 @@
             android:layout_height="100dp"
             android:layout_margin="20dp"
             android:textSize="30sp"
-            android:text="@string/temperature"/>
+            android:text="@string/temperature"
+            android:background="@color/primary_dark"
+            android:textColor="@color/md_light_background"/>
 
         <Button
             android:id="@+id/drug_button"
@@ -22,7 +24,8 @@
             android:layout_margin="20dp"
             android:textSize="30sp"
             android:text="@string/drugs"
-            />
+            android:background="@color/primary_dark"
+            android:textColor="@color/md_light_background" />
 
         <Button
             android:id="@+id/check_button"
@@ -30,7 +33,9 @@
             android:layout_height="100dp"
             android:layout_margin="20dp"
             android:textSize="30sp"
-    android:text="@string/check"/>
+            android:text="@string/check"
+            android:background="@color/primary"
+            android:textColor="@color/md_light_background" />
 
 </LinearLayout>
 

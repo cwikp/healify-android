@@ -42,9 +42,9 @@ public class DrugsListingPopup extends AppCompatActivity implements View.OnClick
             public void onResponse(Call<List<DrugDTO>> call, Response<List<DrugDTO>> response) {
                 if (response.isSuccessful()) {
                     drugsDownloaded(response.body());
-                    Toast.makeText(DrugsListingPopup.this, "Drugs downloaded successfully", Toast.LENGTH_LONG);
+//                    Toast.makeText(DrugsListingPopup.this, "Drugs downloaded successfully", Toast.LENGTH_LONG);
                 } else {
-                    Toast.makeText(DrugsListingPopup.this, "Drugs not downloaded", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(DrugsListingPopup.this, "Drugs not downloaded", Toast.LENGTH_LONG).show();
                 }
             }
 

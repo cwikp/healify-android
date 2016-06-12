@@ -44,16 +44,16 @@ public class AddTemperaturePopup extends Activity {
                 call.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        Toast.makeText(AddTemperaturePopup.this,
-                                Integer.toString(response.code()),
-                                Toast.LENGTH_LONG).show();
+//                        Toast.makeText(AddTemperaturePopup.this,
+//                                Integer.toString(response.code()),
+//                                Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(AddTemperaturePopup.this,
-                                "API failed",
-                                Toast.LENGTH_LONG).show();
+//                        Toast.makeText(AddTemperaturePopup.this,
+//                                "API failed",
+//                                Toast.LENGTH_LONG).show();
                     }
                 });
 

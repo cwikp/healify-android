@@ -49,10 +49,10 @@ public class BrowseTemperaturePopup extends AppCompatActivity implements View.On
             public void onResponse(Call<List<TemperatureDTO>> call, Response<List<TemperatureDTO>> response) {
                 if (response.isSuccessful()) {
                     List<TemperatureDTO> body = response.body();
-                    Toast.makeText(BrowseTemperaturePopup.this, "temperatures downloaded successfully", Toast.LENGTH_LONG);
+//                    Toast.makeText(BrowseTemperaturePopup.this, "temperatures downloaded successfully", Toast.LENGTH_LONG);
                     temperaturesDownloaded(body);
                 } else {
-                    Toast.makeText(BrowseTemperaturePopup.this, "temperatures not downloaded", Toast.LENGTH_LONG);
+//                    Toast.makeText(BrowseTemperaturePopup.this, "temperatures not downloaded", Toast.LENGTH_LONG);
                 }
             }
 

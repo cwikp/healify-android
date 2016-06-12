@@ -140,7 +140,9 @@
             android:layout_height="80dp"
             android:textSize="25sp"
             android:text="Update"
-            android:id="@+id/buttonUpdate" />
+            android:id="@+id/buttonUpdate"
+            android:background="@color/primary_dark"
+            android:textColor="@color/md_light_background" />
 
         <Button
             android:layout_width="match_parent"
@@ -148,7 +150,9 @@
             android:layout_marginTop="20dp"
             android:textSize="25sp"
             android:text="Health State"
-            android:id="@+id/buttonHealthState" />
+            android:id="@+id/buttonHealthState"
+            android:background="@color/primary_dark"
+            android:textColor="@color/md_light_background" />
 
         <Button
             android:layout_width="match_parent"
@@ -156,7 +160,9 @@
             android:layout_marginTop="20dp"
             android:textSize="25sp"
             android:text="Check Out"
-            android:id="@+id/buttonCheckOut" />
+            android:id="@+id/buttonCheckOut"
+            android:background="@color/primary"
+            android:textColor="@color/md_light_background" />
 
 
     </LinearLayout>
