@@ -5,13 +5,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.healify.R;
 import com.healify.entities.CheckupEntity;
 import com.healify.entities.DrugEntity;
+import com.healify.web.api.CheckUpAPI;
+import com.healify.web.api.DrugAPI;
+import com.healify.web.dto.CheckUpDTO;
+import com.healify.web.dto.DrugDTO;
 import com.healify.web.dto.PatientDTO;
+import com.healify.web.services.ServiceGenerator;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CheckupListingPopup extends AppCompatActivity implements View.OnClickListener {
+
+    private CheckUpAPI checkUpAPI = ServiceGenerator.createService(CheckUpAPI.class, null);
 
     private PatientDTO patientDTO;
 
@@ -24,26 +38,40 @@ public class CheckupListingPopup extends AppCompatActivity implements View.OnCli
         Button okButton = (Button) findViewById(R.id.listing_ok_button);
         okButton.setOnClickListener(this);
 
-        //ToDo: remove this mock
-        CheckupEntity[] drugEntities = {
-                new CheckupEntity("OB", 20),
-                new CheckupEntity("Sugar", 250),
-                new CheckupEntity("Calcium", 35)};
+        Call<List<CheckUpDTO>> call = checkUpAPI.getPatientCheckups(patientDTO.getBeaconId());
+        call.enqueue(new Callback<List<CheckUpDTO>>() {
+            @Override
+            public void onResponse(Call<List<CheckUpDTO>> call, Response<List<CheckUpDTO>> response) {
+                if (response.isSuccessful()) {
+                    checkupsDownloaded(response.body());
+                    Toast.makeText(CheckupListingPopup.this, "Drugs downloaded successfully", Toast.LENGTH_LONG);
+                } else {
+                    Toast.makeText(CheckupListingPopup.this, "Drugs not downloaded", Toast.LENGTH_LONG).show();
+                }
+            }
 
-        TextView checkupList = (TextView) findViewById(R.id.drugs);
+            @Override
+            public void onFailure(Call<List<CheckUpDTO>> call, Throwable t) {
 
-        String drugs = "";
-        for(int i=0; i<drugEntities.length; i++) {
-            String drug = drugEntities[i].getName() + " " +
-                    Integer.toString(drugEntities[i].getResult()) + "\n";
-            drugs = drugs.concat(drug);
-        }
-        checkupList.setText(drugs);
-
+            }
+        });
     }
 
     @Override
     public void onClick(View v) {
         this.finish();
+    }
+
+
+    private void checkupsDownloaded(List<CheckUpDTO> body) {
+        TextView checkupList = (TextView) findViewById(R.id.drugs);
+
+        String checkups = "";
+        for (int i = 0; i < body.size(); i++) {
+            String drug = body.get(i).getName() + " " +
+                    body.get(i).getResult()+ "\n";
+            checkups = checkups.concat(drug);
+        }
+        checkupList.setText(checkups);
     }
 }
