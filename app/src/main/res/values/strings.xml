@@ -5,6 +5,7 @@
     <string name="title_activity_single_patient">SinglePatient</string>
     <string name="patient_image">Patient image</string>
     <string name="patient_name">Patient Name</string>
+    <string name="title_activity_check_in_patient">CheckInPatient</string>
 
     <string name="temperature">Temperature</string>
     <string name="drugs">Drugs</string>

@@ -13,4 +13,9 @@ public interface PatientAPI {
 
     @POST("api/patients/with-ids")
     Call<List<PatientDTO>> getPatientsWithIds(@Body List<String> beaconIds);
+
+    @POST("api/patients")
+    Call<PatientDTO> checkInPatient(@Body PatientDTO patientDTO);
+
+
 }

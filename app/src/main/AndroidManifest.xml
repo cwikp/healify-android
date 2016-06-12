@@ -28,6 +28,10 @@
             android:name=".activities.SinglePatient"
             android:label="@string/title_activity_single_patient"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.CheckInPatient"
+            android:label="@string/title_activity_check_in_patient"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".activities.PatientEntry" />
         <activity android:name=".activities.PatientBrowse" />
         <activity android:name=".activities.AddTemperaturePopup" />
