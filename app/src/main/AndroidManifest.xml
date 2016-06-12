@@ -28,7 +28,9 @@
         <activity android:name=".activities.AddTemperaturePopup" />
         <activity android:name=".activities.AddDrugPopup" />
         <activity android:name=".activities.AddCheckPopup" />
-        <activity android:name=".activities.BrowseTemperaturePopup"></activity>
+        <activity android:name=".activities.BrowseTemperaturePopup" />
+        <activity android:name=".activities.DrugsListingPopup" />
+        <activity android:name=".activities.CheckupListingPopup"></activity>
     </application>
 
 </manifest>

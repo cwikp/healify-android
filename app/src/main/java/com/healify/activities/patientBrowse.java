@@ -23,5 +23,14 @@ public class PatientBrowse extends AppCompatActivity {
                 startActivity(new Intent(PatientBrowse.this, BrowseTemperaturePopup.class));
             }
         });
+
+        // drugs popup
+        Button drugsButton = (Button) findViewById(R.id.drug_button);
+        drugsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PatientBrowse.this, DrugsListingPopup.class));
+            }
+        });
     }
 }
