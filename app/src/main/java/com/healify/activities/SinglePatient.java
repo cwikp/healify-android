@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.healify.R;
@@ -33,6 +34,32 @@ public class SinglePatient extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        Button updateButton = (Button) findViewById(R.id.buttonUpdate);
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SinglePatient.this, PatientEntry.class));
+            }
+        });
+
+        Button healthstateButton = (Button) findViewById(R.id.buttonHealthState);
+        healthstateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SinglePatient.this, PatientBrowse.class));
+            }
+        });
+
+//        Button checkoutButton = (Button) findViewById(R.id.buttonCheckOut);
+//        checkoutButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(SinglePatient.this, CheckOutPopup.class));
+//            }
+//        });
+
+
 
         Intent intent = getIntent();
         patientDTO = (PatientDTO) intent.getSerializableExtra("patient");
