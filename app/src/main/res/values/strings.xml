@@ -6,4 +6,20 @@
     <string name="patient_image">Patient image</string>
     <string name="patient_name">Patient Name</string>
     <string name="title_activity_check_in_patient">CheckInPatient</string>
+
+    <string name="temperature">Temperature</string>
+    <string name="drugs">Drugs</string>
+    <string name="check">Check-ups</string>
+    <string name="sure">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    //lista lekow
+
+    <string-array name="units">
+        <item>mg</item>
+        <item>g</item>
+        <item>ml</item>
+    </string-array>
+
 </resources>
