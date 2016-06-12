@@ -19,6 +19,7 @@
             android:textSize="40sp"/>
 
         <EditText
+            android:id="@+id/checkup_name_input"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="130dp"
@@ -42,6 +43,7 @@
             android:textSize="40sp"/>
 
         <EditText
+            android:id="@+id/checkup_result_input"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"

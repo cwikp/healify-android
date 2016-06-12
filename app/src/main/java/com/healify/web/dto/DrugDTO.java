@@ -11,5 +11,5 @@ public class DrugDTO {
     private String date;
     private String name;
     private String unit;
-    private int quantity;
+    private String quantity;
 }

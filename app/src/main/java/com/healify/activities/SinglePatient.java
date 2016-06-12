@@ -67,7 +67,9 @@ public class SinglePatient extends AppCompatActivity {
         checkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SinglePatient.this, CheckOutPopup.class));
+                Intent intent = new Intent(SinglePatient.this, CheckOutPopup.class);
+                intent.putExtra("patientDTO", patientDTO);
+                startActivity(intent);
             }
         });
     }

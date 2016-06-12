@@ -7,5 +7,6 @@ import lombok.experimental.Builder;
 @Builder
 public class CheckUpDTO {
     private String name;
+    private String result;
     private String date;
 }

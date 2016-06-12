@@ -43,7 +43,9 @@ public class PatientEntry extends AppCompatActivity {
         drugButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PatientEntry.this, AddDrugPopup.class));
+                Intent intent = new Intent(PatientEntry.this, AddDrugPopup.class);
+                intent.putExtra("patientDTO", patientDTO);
+                startActivity(intent);
 
             }
         });
@@ -56,8 +58,9 @@ public class PatientEntry extends AppCompatActivity {
         checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PatientEntry.this, AddCheckPopup.class));
-
+                Intent intent = new Intent(PatientEntry.this, AddCheckPopup.class);
+                intent.putExtra("patientDTO", patientDTO);
+                startActivity(intent);
             }
         });
 
