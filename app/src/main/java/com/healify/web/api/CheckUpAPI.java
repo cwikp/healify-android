@@ -8,9 +8,8 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public interface CheckUpAPI {
+public interface CheckupAPI {
 
     @GET("api/patients/{id}/check-ups")
-    Call<List<CheckUpDTO>> getPatientCheckups(@Path("id") String id);
-
+    Call<List<CheckUpDTO>> getPatientsCheckups(@Path("id") String id);
 }

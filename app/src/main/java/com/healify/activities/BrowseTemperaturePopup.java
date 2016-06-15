@@ -1,5 +1,6 @@
 package com.healify.activities;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.androidplot.xy.LineAndPointFormatter;
+import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
@@ -99,7 +101,7 @@ public class BrowseTemperaturePopup extends AppCompatActivity implements View.On
                 Arrays.asList(x),
                 Arrays.asList(data),
                 "Temperature");
-        temperaturePlot.addSeries(series, new LineAndPointFormatter());
+        temperaturePlot.addSeries(series, new LineAndPointFormatter(Color.rgb(0xcc, 0, 0), Color.rgb(0xCC, 0, 0), Color.rgb(57, 52, 52), new PointLabelFormatter(Color.WHITE)));
 
         temperaturePlot.redraw();
 
